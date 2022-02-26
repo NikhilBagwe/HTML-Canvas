@@ -96,3 +96,52 @@ function animate() {
 }
 animate()
 ```
+
+## Assigning individual colors to each particle using HSL color scheme creating Rainbow effect:
+
+- Add a new property 'color' inside constructor of particle class
+- Change color by incrementing hue each time inside animation loop
+
+```javascript
+let hue = 0
+
+class Particle {
+  constructor() {
+    this.x = mouse.x
+    this.y = mouse.y
+    this.size = Math.random() * 15 + 1
+    this.speedX = Math.random() * 3 - 1.5 
+    this.speedY = Math.random() * 3 - 1.5
+    // Using HSL color scheme
+    this.color = 'hsl(' + hue + ', 100%, 50%)'
+  }
+
+  update() {
+    this.x += this.speedX
+    this.y += this.speedY
+    // make the particles shrink
+    if (this.size > 0.2) this.size -= 0.1
+  }
+
+  // draws a circle represnting a particle
+  draw() {
+    ctx.fillStyle = this.color
+    ctx.beginPath()
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+    ctx.fill()
+  }
+}
+
+function animate() {
+  ctx.fillStyle = 'rgba(0,0,0,0.05)'
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
+  handleParticles()
+  
+  // Normal effect - increase hue by 1
+  // hue++
+  // To create rainbow effect increase hue by 5 each time
+  hue += 5
+  requestAnimationFrame(animate)
+}
+animate()
+```
