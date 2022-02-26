@@ -18,6 +18,8 @@ class Particle {
   update() {
     this.x += this.speedX
     this.y += this.speedY
+    // make the particles shrink
+    if (this.size > 0.2) this.size -= 0.1
   }
 
   // draws a circle represnting a particle
@@ -45,6 +47,12 @@ function handleParticles() {
   for (let i = 0; i < particlesArray.length; i++) {
     particlesArray[i].update()
     particlesArray[i].draw()
+    
+    // remove circle whose size is smaller than 0.3
+    if (particlesArray[i].size <= 0.3) {
+      particlesArray.splice(i, 1)
+      i--
+    }
   }
 }
 
