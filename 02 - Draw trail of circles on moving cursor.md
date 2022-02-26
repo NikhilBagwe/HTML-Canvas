@@ -83,3 +83,16 @@ function animate() {
 }
 animate()
 ```
+
+## Fading the trail by drawing semi-transparent rectangle :
+
+```javascript
+function animate() {
+  // Instead of using clearRect we will draw a semi-transparent rectangle over the canvas again and again.
+  ctx.fillStyle = 'rgba(0,0,0,0.05)'
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
+  handleParticles()
+  requestAnimationFrame(animate)
+}
+animate()
+```
